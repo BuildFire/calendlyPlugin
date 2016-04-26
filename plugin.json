@@ -1,0 +1,21 @@
+{
+  "author": "BuildFire",
+  "pluginName": "Calendly",
+  "pluginDescription": "Simple, beautiful scheduling. Say goodbye to email and phone tag for finding the perfect meeting time.",
+  "supportEmail": "support@buildfire.com",
+  "control": {
+    "content": {
+      "enabled": true
+    },
+    "design": {
+      "enabled": false
+    },
+    "settings": {
+      "enabled": false
+    }
+  },
+  "widget": {
+  },
+  "features": [],
+  "languages": ["en"]
+}
