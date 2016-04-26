@@ -66,7 +66,7 @@
     .factory("Utils", [function () {
       return {
         validateUrl: function (url) {
-          if ((/typeform.com/).test(url))
+          if ((/calendly.com\//).test(url))
             return true;
           else return false;
         }
