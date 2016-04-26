@@ -5,7 +5,7 @@ describe('Unit: calendlyPluginContent content app', function () {
     beforeEach(inject(function () {
 
     }));
-    var ContentHome, scope, $rootScope, $controller, Buildfire, ActionItems, TAG_NAMES, STATUS_CODE, LAYOUTS, STATUS_MESSAGES, CONTENT_TYPE, q, Utils;
+    var ContentHome, scope, $rootScope, $controller, Buildfire, TAG_NAMES, STATUS_CODE, LAYOUTS, STATUS_MESSAGES, CONTENT_TYPE, q, Utils;
 
     beforeEach(inject(function (_Utils_, _$rootScope_, _$q_, _$controller_, _TAG_NAMES_, _STATUS_CODE_, _STATUS_MESSAGES_) {
       $rootScope = _$rootScope_;
@@ -37,8 +37,6 @@ describe('Unit: calendlyPluginContent content app', function () {
 
         }
       };
-        ActionItems = jasmine.createSpyObj('ActionItems', ['showDialog'])
-
     }));
 
     beforeEach(function () {
@@ -47,7 +45,6 @@ describe('Unit: calendlyPluginContent content app', function () {
         $q: q,
         Buildfire: Buildfire,
         TAG_NAMES: TAG_NAMES,
-        ActionItems: ActionItems,
         STATUS_CODE: STATUS_CODE,
         CONTENT_TYPE: CONTENT_TYPE,
         LAYOUTS: LAYOUTS,
@@ -95,7 +92,7 @@ describe('Unit: calendlyPluginContent content app', function () {
       });
 
       it('it should pass if  ContentHome.addSubDomain is called and it has ContentHome.subDomain', function () {
-        ContentHome.subDomain = 'KMT';
+        ContentHome.subDomain = 'rjaseoud';
         ContentHome.addSubDomain();
       });
 
