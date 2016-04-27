@@ -36,14 +36,30 @@
         ContentHome.validateUrl = function () {
           if (ContentHome.calendar)
             ContentHome.data.content.calendar = ContentHome.calendar;
-          if (ContentHome.link && Utils.validateUrl(ContentHome.link)) {
-            ContentHome.data.content.link = ContentHome.link;
-            ContentHome.validUrl = true;
-            $timeout(function () {
+          if (ContentHome.link && (/calendly.com\//).test(ContentHome.link)){
+            ContentHome.successValidate = function (result) {
+              if (result) {
+                ContentHome.data.content.link = ContentHome.link;
+                ContentHome.validUrl = true;
+                $timeout(function () {
+                  ContentHome.validUrl = false;
+                }, 3000);
+                ContentHome.inValidUrl = false;
+                ContentHome.saveData(ContentHome.data, TAG_NAMES.CALENDLY_INFO);
+              }
+            };
+            ContentHome.errorValidate = function (err) {
+              ContentHome.inValidUrl = true;
+              $timeout(function () {
+                ContentHome.inValidUrl = false;
+              }, 3000);
               ContentHome.validUrl = false;
+            };
+            $timeout(function () {
+              ContentHome.isUrlValidated = null;
             }, 3000);
-            ContentHome.inValidUrl = false;
-            ContentHome.saveData(ContentHome.data, TAG_NAMES.CALENDLY_INFO);
+
+            Utils.validateUrl(ContentHome.link).then(ContentHome.successValidate, ContentHome.errorValidate);
           } else {
             ContentHome.inValidUrl = true;
             $timeout(function () {
