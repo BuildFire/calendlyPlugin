@@ -58,20 +58,17 @@ describe('Unit: calendlyPluginContent content app', function () {
       });
 
       it('it should pass if ContentHome.validateUrl is called with success', function () {
-        ContentHome.subDomain = 'rjaseoud';
-        ContentHome.custom = 'https://calendly.com/rjaseoud';
-        Utils.validateUrl(ContentHome.custom);
+        ContentHome.calendar = 'rjaseoud';
+        ContentHome.link = 'https://calendly.com/rjaseoud';
+        Utils.validateUrl(ContentHome.link);
         ContentHome.validateUrl();
-        var result  = true;
       });
 
       it('it should pass if ContentHome.validateUrl is called with error', function () {
-
         ContentHome.validateUrl();
       });
 
       it('it should pass if ContentHome.gotToPage is called', function () {
-
         ContentHome.gotToPage();
       });
 
@@ -87,18 +84,13 @@ describe('Unit: calendlyPluginContent content app', function () {
         ContentHome.error(result);
       });
 
-      it('it should pass if  ContentHome.addSubDomain is called', function () {
-        ContentHome.addSubDomain();
+      it('it should pass if  ContentHome.addCalendar is called', function () {
+        ContentHome.addCalendar();
       });
 
-      it('it should pass if  ContentHome.addSubDomain is called and it has ContentHome.subDomain', function () {
-        ContentHome.subDomain = 'rjaseoud';
-        ContentHome.addSubDomain();
-      });
-
-      it('it should pass if  ContentHome.clearUrl is called and it has ContentHome.custom is null', function () {
-        ContentHome.custom = null;
-        ContentHome.clearUrl();
+      it('it should pass if  ContentHome.addCalendar is called and it has ContentHome.calendar', function () {
+        ContentHome.calendar = 'rjaseoud';
+        ContentHome.addCalendar();
       });
 
       it('it should pass if ContentHome.init is called for error', function () {

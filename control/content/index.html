@@ -22,24 +22,28 @@
   <div class="content">
     <div class="item clearfix row">
       <div class="labels col-md-3 padding-right-zero pull-left">
-        <span>URL</span>
+        <span>Calendar</span>
       </div>
       <div class="main pull-right col-md-9 padding-left-zero row">
         <div class="pull-left col-md-8 padding-zero">
           <input type="text" class="form-control"
-                 placeholder="Sub Domain" ng-model="ContentHome.subDomain"
-                 ng-change="ContentHome.addSubDomain()">
+                 placeholder="Calendar" ng-model="ContentHome.calendar"
+                 ng-change="ContentHome.addCalendar()">
         </div>
-        <br>
-        <br>
-
+      </div>
+      <br>
+      <br>
+      <div class="labels col-md-3 padding-right-zero pull-left">
+        <span>Link</span>
+      </div>
+      <div class="main pull-right col-md-9 padding-left-zero row">
         <div class="pull-left col-md-8 padding-zero">
           <input type="url" class="form-control"
-                 placeholder="Custom" ng-model="ContentHome.custom" ng-change="ContentHome.clearUrl()">
+                 placeholder="Link" ng-model="ContentHome.link" readonly disabled>
         </div>
         <div class="col-md-4 pull-right">
           <button class="btn btn-primary pull-right stretch"
-                  ng-disabled="!(ContentHome.custom || ContentHome.subDomain)"
+                  ng-disabled="!ContentHome.calendar"
                   ng-click="ContentHome.validateUrl()">
             Validate
           </button>
@@ -51,6 +55,7 @@
       <div class="col-md-9 pull-right">
         <p>Dont have a Calendly account click <a
             ng-click="ContentHome.gotToPage()">here</a> to register</p>
+
         <p>Make sure you make your page mobile friendly.</p>
       </div>
     </div>

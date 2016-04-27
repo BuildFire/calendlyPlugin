@@ -11,8 +11,8 @@
 
         ContentHome.data = {
           content: {
-            "subDomain": "",
-            "custom": ""
+            "calendar": "",
+            "link": ""
           }
         };
 
@@ -34,16 +34,32 @@
         };
 
         ContentHome.validateUrl = function () {
-          if (ContentHome.subDomain)
-            ContentHome.data.content.subDomain = ContentHome.subDomain;
-          if (ContentHome.custom && Utils.validateUrl(ContentHome.custom)) {
-            ContentHome.data.content.custom = ContentHome.custom;
-            ContentHome.validUrl = true;
-            $timeout(function () {
+          if (ContentHome.calendar)
+            ContentHome.data.content.calendar = ContentHome.calendar;
+          if (ContentHome.link && (/calendly.com\//).test(ContentHome.link)){
+            ContentHome.successValidate = function (result) {
+              if (result) {
+                ContentHome.data.content.link = ContentHome.link;
+                ContentHome.validUrl = true;
+                $timeout(function () {
+                  ContentHome.validUrl = false;
+                }, 3000);
+                ContentHome.inValidUrl = false;
+                ContentHome.saveData(ContentHome.data, TAG_NAMES.CALENDLY_INFO);
+              }
+            };
+            ContentHome.errorValidate = function (err) {
+              ContentHome.inValidUrl = true;
+              $timeout(function () {
+                ContentHome.inValidUrl = false;
+              }, 3000);
               ContentHome.validUrl = false;
+            };
+            $timeout(function () {
+              ContentHome.isUrlValidated = null;
             }, 3000);
-            ContentHome.inValidUrl = false;
-            ContentHome.saveData(ContentHome.data, TAG_NAMES.CALENDLY_INFO);
+
+            Utils.validateUrl(ContentHome.link).then(ContentHome.successValidate, ContentHome.errorValidate);
           } else {
             ContentHome.inValidUrl = true;
             $timeout(function () {
@@ -53,21 +69,15 @@
           }
         };
 
-        ContentHome.addSubDomain = function () {
-          if (ContentHome.subDomain) {
-            ContentHome.custom = "https://calendly.com/" + ContentHome.subDomain;
+        ContentHome.addCalendar = function () {
+          if (ContentHome.calendar) {
+            ContentHome.link = "https://calendly.com/" + ContentHome.calendar;
           }
           else {
-            ContentHome.data.content.subDomain = null;
-            ContentHome.saveData(ContentHome.data, TAG_NAMES.CALENDLY_INFO);
-          }
-        };
-
-        ContentHome.clearUrl = function () {
-          if (!ContentHome.custom) {
-            ContentHome.data.content.custom = null;
-            ContentHome.data.content.subDomain = null;
-            ContentHome.subDomain = null;
+            ContentHome.data.content.link = null;
+            ContentHome.data.content.calendar = null;
+            ContentHome.link = null;
+            ContentHome.calendar = null;
             ContentHome.saveData(ContentHome.data, TAG_NAMES.CALENDLY_INFO);
           }
         };
@@ -82,18 +92,18 @@
               ContentHome.data = result.data;
               if (!ContentHome.data.content)
                 ContentHome.data.content = {};
-              if (ContentHome.data.content.subDomain)
-                ContentHome.subDomain = ContentHome.data.content.subDomain;
-              if (ContentHome.data.content.custom)
-                ContentHome.custom = ContentHome.data.content.custom;
+              if (ContentHome.data.content.calendar)
+                ContentHome.calendar = ContentHome.data.content.calendar;
+              if (ContentHome.data.content.link)
+                ContentHome.link = ContentHome.data.content.link;
             }
             else {
               var dummyData = {
-                custom: "https://calendly.com/rjaseoud",
-                subDomain: "rjaseoud"
+                link: "https://calendly.com/rjaseoud",
+                calendar: "rjaseoud"
               };
-              ContentHome.subDomain = ContentHome.data.content.subDomain = dummyData.subDomain;
-              ContentHome.custom = ContentHome.data.content.custom = dummyData.custom;
+              ContentHome.calendar = ContentHome.data.content.calendar = dummyData.calendar;
+              ContentHome.link = ContentHome.data.content.link = dummyData.link;
             }
           };
           ContentHome.error = function (err) {

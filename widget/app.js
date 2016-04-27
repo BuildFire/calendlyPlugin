@@ -20,20 +20,20 @@
                 content: {}
               };
               var dummyData = {
-                custom: "https://calendly.com/rjaseoud",
-                subDomain: "rjaseoud"
+                link: "https://calendly.com/rjaseoud",
+                calendar: "rjaseoud"
               };
-              WidgetHome.data.content.custom = dummyData.custom;
-              WidgetHome.data.content.subDomain = dummyData.subDomain;
+              WidgetHome.data.content.link = dummyData.link;
+              WidgetHome.data.content.calendar = dummyData.calendar;
             }
 
             buildfire.getContext(function (err, context) {
               if (context) {
-                if (WidgetHome.data.content.custom && context.device.platform == "web") {
+                if (WidgetHome.data.content.link && context.device.platform == "web") {
                   WidgetHome.isWebPlatform = true;
                 } else {
-                  if (WidgetHome.data.content.custom)
-                    buildfire.navigation.openWindow(WidgetHome.data.content.custom, "_blank");
+                  if (WidgetHome.data.content.link)
+                    buildfire.navigation.openWindow(WidgetHome.data.content.link, "_blank");
                 }
               }
               else {
