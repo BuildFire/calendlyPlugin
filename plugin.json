@@ -3,6 +3,7 @@
   "pluginName": "Calendly",
   "pluginDescription": "Simple, beautiful scheduling. Say goodbye to email and phone tag for finding the perfect meeting time.",
   "supportEmail": "support@buildfire.com",
+  "supportSite":"http://support.appdocumentation.com/knowledge-base/calendly-plugin-tutorial//",
   "control": {
     "content": {
       "enabled": true
