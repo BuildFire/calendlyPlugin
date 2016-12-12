@@ -1,19 +1,19 @@
 'use strict';
 
-(function(angular, buildfire) {
+(function (angular, buildfire) {
     angular.module('calendlyPluginContent')
-        .provider('Buildfire', [function() {
+        .provider('Buildfire', [function () {
             var Buildfire = this;
-            Buildfire.$get = function() {
+            Buildfire.$get = function () {
                 return buildfire
             };
             return Buildfire;
         }])
-        .factory("DataStore", ['Buildfire', '$q', 'STATUS_CODE', 'STATUS_MESSAGES', function(Buildfire, $q, STATUS_CODE, STATUS_MESSAGES) {
+        .factory("DataStore", ['Buildfire', '$q', 'STATUS_CODE', 'STATUS_MESSAGES', function (Buildfire, $q, STATUS_CODE, STATUS_MESSAGES) {
             return {
-                get: function(_tagName) {
+                get: function (_tagName) {
                     var deferred = $q.defer();
-                    Buildfire.datastore.get(_tagName, function(err, result) {
+                    Buildfire.datastore.get(_tagName, function (err, result) {
                         if (err) {
                             return deferred.reject(err);
                         } else if (result) {
@@ -21,7 +21,7 @@
                         }
                     });
                     return deferred.promise;
-                }, update: function(_id, _item, _tagName) {
+                }, update: function (_id, _item, _tagName) {
                     var deferred = $q.defer();
                     if (typeof _id == 'undefined') {
                         return deferred.reject(new Error({
@@ -35,7 +35,7 @@
                             message: STATUS_MESSAGES.UNDEFINED_DATA
                         }));
                     }
-                    Buildfire.datastore.update(_id, _item, _tagName, function(err, result) {
+                    Buildfire.datastore.update(_id, _item, _tagName, function (err, result) {
                         if (err) {
                             return deferred.reject(err);
                         } else if (result) {
@@ -44,7 +44,7 @@
                     });
                     return deferred.promise;
                 },
-                save: function(_item, _tagName) {
+                save: function (_item, _tagName) {
                     var deferred = $q.defer();
                     if (typeof _item == 'undefined') {
                         return deferred.reject(new Error({
@@ -52,7 +52,7 @@
                             message: STATUS_MESSAGES.UNDEFINED_DATA
                         }));
                     }
-                    Buildfire.datastore.save(_item, _tagName, function(err, result) {
+                    Buildfire.datastore.save(_item, _tagName, function (err, result) {
                         if (err) {
                             return deferred.reject(err);
                         } else if (result) {
@@ -63,32 +63,25 @@
                 }
             }
         }])
-        .factory("Utils", ["$http", '$q', 'PROXY_SERVER', function($http, $q, PROXY_SERVER) {
+        .factory("Utils", ["$http", '$q', 'PROXY_SERVER', function ($http, $q, PROXY_SERVER) {
             return {
-                validateUrl: function(url) {
+                validateUrl: function (url) {
                     var deferred = $q.defer();
                     if (!url) {
                         deferred.reject(new Error('Undefined feed url'));
                     }
-                    $http.post(this.getProxyServerUrl() + '/validateJotFormUrl', {
+                    $http.post(PROXY_SERVER.serverUrl + '/validateJotFormUrl', {
                         url: url
-                    }).success(function(response) {
+                    }).success(function (response) {
                         if (response)
                             deferred.resolve(response);
                         else
                             deferred.resolve(null);
                     })
-                        .error(function(error) {
+                        .error(function (error) {
                             deferred.reject(error);
                         });
                     return deferred.promise;
-                },
-                isAndroid: function() {
-                    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-                    return (/android/i.test(userAgent));
-                },
-                getProxyServerUrl: function() {
-                    return this.isAndroid() ? PROXY_SERVER.serverUrl : PROXY_SERVER.secureServerUrl;
                 }
             }
         }]);
