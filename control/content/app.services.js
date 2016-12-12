@@ -63,14 +63,15 @@
         }
       }
     }])
-    .factory("Utils", ["$http", '$q', 'PROXY_SERVER',function ($http, $q, PROXY_SERVER) {
+    .factory("Utils", ["$http", '$q', 'PROXY_SERVER', function ($http, $q, PROXY_SERVER) {
       return {
         validateUrl: function (url) {
           var deferred = $q.defer();
           if (!url) {
             deferred.reject(new Error('Undefined feed url'));
           }
-          $http.post(PROXY_SERVER.serverUrl + '/validateJotFormUrl', {
+          var serverUrl = this.isAndroid() ? PROXY_SERVER.serverUrl : PROXY_SERVER.secureServerUrl;
+          $http.post(serverUrl + '/validateJotFormUrl', {
             url: url
           }).success(function (response) {
             if (response)
@@ -82,6 +83,10 @@
               deferred.reject(error);
             });
           return deferred.promise;
+        },
+        isAndroid: function () {
+          var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+          return (/android/i.test(userAgent));
         }
       }
     }]);
