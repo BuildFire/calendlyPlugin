@@ -10,7 +10,7 @@
          * Fetch user's data from datastore
          */
         WidgetHome.init = function () {
-          $scope.isLiveMode = buildfire.context.liveMode=="1";
+
           WidgetHome.success = function (result) {
             if (result.data && result.id) {
               WidgetHome.data = result.data;
@@ -30,6 +30,7 @@
 
             buildfire.getContext(function (err, context) {
               if (context) {
+                $scope.isLiveMode = buildfire.context.liveMode=="1";
                 if (WidgetHome.data.content.link && context.device.platform == "web") {
                   if( buildfire.context.liveMode=="0")//CP
                     document.querySelector(".link-verified").style.display = "block";
