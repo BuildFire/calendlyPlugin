@@ -33,7 +33,10 @@
                   WidgetHome.isWebPlatform = true;
                 } else {
                   if (WidgetHome.data.content.link)
-                    buildfire.navigation.openWindow(WidgetHome.data.content.link, "_blank");
+                    buildfire.navigation.openWindow(WidgetHome.data.content.link, "_blank", function(){
+                      //Go back due to issue with popup
+                      buildfire.navigation.goBack();
+                    });
                 }
               }
               else {
