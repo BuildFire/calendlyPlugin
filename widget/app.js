@@ -10,6 +10,7 @@
          * Fetch user's data from datastore
          */
         WidgetHome.init = function () {
+
           WidgetHome.success = function (result) {
             if (result.data && result.id) {
               WidgetHome.data = result.data;
@@ -29,8 +30,12 @@
 
             buildfire.getContext(function (err, context) {
               if (context) {
+                $scope.isLiveMode = buildfire.context.liveMode=="1";
                 if (WidgetHome.data.content.link && context.device.platform == "web") {
-                  WidgetHome.isWebPlatform = true;
+                  if( buildfire.context.liveMode=="0")//CP
+                    document.querySelector(".link-verified").style.display = "block";
+                  else//HTML5 Version
+                    window.open(WidgetHome.data.content.link, "_blank");
                 } else {
                   if (WidgetHome.data.content.link)
                     buildfire.navigation.openWindow(WidgetHome.data.content.link, "_blank", function(){

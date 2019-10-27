@@ -16,12 +16,19 @@
   <script src="app.js"></script>
   <script src="enums.js"></script>
   <script src="app.services.js"></script>
+  <style>
+    .link-verified {
+      text-align: center;
+      vertical-align: middle;
+      height: 100%;
+      display: none;
+    }
+  </style>
 </head>
 <body>
 
 <div class="content" ng-controller="WidgetHomeCtrl as WidgetHome">
-  <div style="text-align: center;vertical-align: middle; height: 100%"
-       ng-if="WidgetHome.data.content && WidgetHome.data.content.link && WidgetHome.isWebPlatform">
+  <div class="link-verified" >
     <h3 style="margin-top: 50%; opacity: .25;"></h3>
 
     <div>
