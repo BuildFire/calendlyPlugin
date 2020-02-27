@@ -2,6 +2,7 @@
   "author": "BuildFire",
   "pluginName": "Calendly",
   "pluginDescription": "Simple, beautiful scheduling. Say goodbye to email and phone tag for finding the perfect meeting time.Related Topics:SimplyBook",
+  "pluginKeywords":"appointment",
   "supportEmail": "support@buildfire.com",
   "supportSite":"http://learn.appdocumentation.com/plugin-tutorials/calendly-plugin-tutorial/",
   "control": {
