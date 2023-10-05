@@ -1,7 +1,7 @@
 {
   "author": "BuildFire",
   "pluginName": "Calendly",
-  "pluginDescription": "Simple, beautiful scheduling. Say goodbye to email and phone tag for finding the perfect meeting time.Related Topics:SimplyBook",
+  "pluginDescription": "Sync your Calendly calendar to your app effortlessly",
   "pluginKeywords":"appointment",
   "supportEmail": "support@buildfire.com",
   "supportSite":"http://learn.appdocumentation.com/plugin-tutorials/calendly-plugin-tutorial/",
@@ -19,5 +19,31 @@
   "widget": {
   },
   "features": [],
-  "languages": ["en"]
+  "languages": ["en"],
+  "media": [
+    {
+      "type": "image-resource",
+      "path": "1-plugin.png"
+    },
+    {
+      "type": "image-resource",
+      "path": "2-benefits.png"
+    },
+    {
+      "type": "image-resource",
+      "path": "3-use-cases.png"
+    },
+    {
+      "type": "image-resource",
+      "path": "4-content-tab.png"
+    },
+    {
+      "type": "image-resource",
+      "path": "5-analytics-tab.png"
+    },
+    {
+      "type": "youtube-video",
+      "path": "https://www.youtube.com/watch?v=Qn8XFcRaIXk"
+    }
+  ]
 }
